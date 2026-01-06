@@ -3,21 +3,30 @@ import MailIcon from "@mui/icons-material/Mail";
 import { AppBar, Avatar, Box, InputBase, Menu, MenuItem, styled, Toolbar, Typography } from "@mui/material";
 import PetsIcon from "@mui/icons-material/Pets";
 import { Notifications } from "@mui/icons-material";
+import PersonIcon from "@mui/icons-material/Person";
+import SettingsIcon from "@mui/icons-material/Settings";
+import LogoutIcon from "@mui/icons-material/Logout";
+import Divider from "@mui/material/Divider";
+
 import { useState } from "react";
 const Navbar = () => {
     const [open, setOpen] = useState(false);
+ 
 
     const StyledToolBar = styled(Toolbar)({
         display: "flex",
         justifyContent: "space-between",
     });
-
-    const Search = styled("div")(({ theme }) => ({
-        background: "white",
-        padding: "0 10px",
-        width: "40%",
-        borderRadius: theme.shape.borderRadius,
-    }));
+const Search = styled("div")(({ theme }) => ({
+  backgroundColor:
+    theme.palette.mode === "dark"
+      ? theme.palette.background.paper
+      : "#ffffff",
+  color: theme.palette.text.primary,
+  padding: "0 10px",
+  width: "40%",
+  borderRadius: theme.shape.borderRadius,
+}));
 
     const Icons = styled(Box)(({ theme }) => ({
         display: "none",
@@ -38,7 +47,7 @@ const Navbar = () => {
         },
     }));
     return (
-        <AppBar position="sticky">
+        <AppBar position="sticky" color="secondary">
             <StyledToolBar>
                 <Typography variant="h6" sx={{ display: { xs: "none", sm: "block" } }}>
                     New Era
@@ -49,10 +58,10 @@ const Navbar = () => {
                 </Search>
 
                 <Icons>
-                    <Badge badgeContent={4} color="error">
+                    <Badge badgeContent={19} color="error">
                         <MailIcon color="action" />
                     </Badge>
-                    <Badge badgeContent={2} color="error">
+                    <Badge badgeContent={26} color="error">
                         <Notifications color="action" />
                     </Badge>
                     <Avatar
@@ -72,23 +81,50 @@ const Navbar = () => {
                 </UserBox>
             </StyledToolBar>
             <Menu
-                id="demo-positioned-menu"
-                aria-labelledby="demo-positioned-button"
-                open={open}
-                onClose={(e) => setOpen(false)}
-                anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                }}
-                transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                }}
-            >
-                <MenuItem>Profile</MenuItem>
-                <MenuItem>My account</MenuItem>
-                <MenuItem>Logout</MenuItem>
-            </Menu>
+  open={open}
+  onClose={() => setOpen(false)}
+  anchorOrigin={{ vertical: "top", horizontal: "right" }}
+  transformOrigin={{ vertical: "top", horizontal: "right" }}
+  PaperProps={{
+    sx: (theme) => ({
+      mt: 5,
+      minWidth: 180,
+      bgcolor: theme.palette.background.paper,
+      borderRadius: 2,
+      boxShadow:
+        theme.palette.mode === "dark"
+          ? "0 10px 30px rgba(0,0,0,0.7)"
+          : "0 10px 30px rgba(0,0,0,0.15)",
+    }),
+  }}
+>
+  <MenuItem sx={{ gap: 1 ,
+  "&:hover": {
+    bgcolor: "action.hover",
+  },}}>
+    <PersonIcon fontSize="small" />
+    Profile
+  </MenuItem>
+
+  <MenuItem sx={{ gap: 1,
+  "&:hover": {
+    bgcolor: "action.hover",
+  }, }}>
+    <SettingsIcon fontSize="small" />
+    My Account
+  </MenuItem>
+
+  <Divider />
+
+  <MenuItem sx={{ gap: 1, color: "error.main",
+  "&:hover": {
+    bgcolor: "action.hover",
+  }, }}>
+    <LogoutIcon fontSize="small" />
+    Logout
+  </MenuItem>
+</Menu>
+
         </AppBar>
     );
 };

@@ -6,7 +6,7 @@ const Feed = () => {
         <Box p={2} flex={4}>
             <Post />
             <Post />
-            <Post />
+            
         </Box>
     );
 };

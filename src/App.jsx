@@ -6,20 +6,17 @@ import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import Add from "./components/Add";
 import { useState } from "react";
+import { getTheme } from "./components/Theme";
 
 function App() {
     const [mode, setMode] = useState("light");
 
-    const DarkTheme = createTheme({
-        palette: {
-            mode: mode,
-        },
-    });
+const theme = getTheme(mode);    
 
     return (
         <>
             <CssBaseline />
-            <ThemeProvider theme={DarkTheme}>
+            <ThemeProvider theme={theme}>
                 <Box bgcolor={"background.default"} color={"text.primary"}>
                     <Navbar />
                     <Stack direction="row" justifyContent="space-between" spacing={2}>
